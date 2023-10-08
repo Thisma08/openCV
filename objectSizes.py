@@ -40,3 +40,15 @@ for c in cnts:
 	cv2.drawContours(orig, [box.astype("int")], -1, (0, 255, 0), 2)
 	for (x, y) in box:
 		cv2.circle(orig, (int(x), int(y)), 5, (0, 0, 255), -1)
+
+	(tl, tr, br, bl) = box
+	(tltrX, tltrY) = midpoint(tl, tr)
+	(blbrX, blbrY) = midpoint(bl, br)
+	(tlblX, tlblY) = midpoint(tl, bl)
+	(trbrX, trbrY) = midpoint(tr, br)
+	cv2.circle(orig, (int(tltrX), int(tltrY)), 5, (255, 0, 0), -1)
+	cv2.circle(orig, (int(blbrX), int(blbrY)), 5, (255, 0, 0), -1)
+	cv2.circle(orig, (int(tlblX), int(tlblY)), 5, (255, 0, 0), -1)
+	cv2.circle(orig, (int(trbrX), int(trbrY)), 5, (255, 0, 0), -1)
+	cv2.line(orig, (int(tltrX), int(tltrY)), (int(blbrX), int(blbrY)), (255, 0, 255), 2)
+	cv2.line(orig, (int(tlblX), int(tlblY)), (int(trbrX), int(trbrY)), (255, 0, 255), 2)
