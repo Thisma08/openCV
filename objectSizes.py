@@ -28,3 +28,15 @@ cnts = imutils.grab_contours(cnts)
 
 (cnts, _) = contours.sort_contours(cnts)
 pixelsPerMetric = None
+
+for c in cnts:
+	if cv2.contourArea(c) < 100:
+		continue
+	orig = image.copy()
+	box = cv2.minAreaRect(c)
+	box = cv2.cv.BoxPoints(box) if imutils.is_cv2() else cv2.boxPoints(box)
+	box = np.array(box, dtype="int")
+	box = perspective.order_points(box)
+	cv2.drawContours(orig, [box.astype("int")], -1, (0, 255, 0), 2)
+	for (x, y) in box:
+		cv2.circle(orig, (int(x), int(y)), 5, (0, 0, 255), -1)
