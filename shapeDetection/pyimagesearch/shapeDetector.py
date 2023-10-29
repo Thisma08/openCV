@@ -15,10 +15,10 @@ class ShapeDetector:
         elif len(approx) == 4:
             (x, y, w, h) = cv2.boundingRect(approx)
             ar = w / float(h)
-            shape = "square" if 0.95 <= ar <= 1.05 else "rectangle"
+            shape = "carre" if 0.95 <= ar <= 1.05 else "rectangle"
         elif len(approx) == 5:
-            shape = "pentagon"
+            shape = "pentagone"
         else:
-            shape = "circle"
+            shape = "cercle"
         return shape
 
